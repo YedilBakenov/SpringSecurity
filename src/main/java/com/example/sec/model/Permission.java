@@ -1,7 +1,9 @@
 package com.example.sec.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -9,6 +11,8 @@ import org.springframework.security.core.GrantedAuthority;
 @Table(name = "PERMISSION")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Permission implements GrantedAuthority {
 
     @Id
@@ -16,7 +20,7 @@ public class Permission implements GrantedAuthority {
     @Column(name = "ID")
     private int id;
 
-    @Column(name ="NAME")
+    @Column(name ="ROLE")
     private String role;
 
     @Override

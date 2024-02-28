@@ -23,7 +23,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final UserRepository userRepository;
-    private final UserService userService;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -53,7 +52,7 @@ public class SecurityConfig {
 
         http.formLogin(fl ->
             fl.loginProcessingUrl("/auth")
-                    .usernameParameter("username")
+                    .usernameParameter("email")
                     .passwordParameter("password")
                     .loginPage("/sign-in")
                     .defaultSuccessUrl("/", true)
