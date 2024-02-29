@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec ="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,10 +8,18 @@
 <body>
     <h1>Hello World!</h1>
 
-    <a href="/admin">ADMIN PAGE</a>
+    <a sec:authorize="hasAnyRole('ROLE_ADMIN')" href="/admin">ADMIN PAGE</a>
 
     <form action="/logout" method="post">
         <button>LOG OUT</button>
+    </form>
+
+
+    <form action="/change-password" method="post">
+        <input type="password" name="currentPassword">
+        <input type="password" name="newPassword">
+        <input type="password" name="reNewPassword">
+        <button >CHANGE PASSWORD</button>
     </form>
 </body>
 </html>
