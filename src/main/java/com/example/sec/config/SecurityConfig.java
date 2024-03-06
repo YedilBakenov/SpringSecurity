@@ -1,7 +1,6 @@
 package com.example.sec.config;
 
 import com.example.sec.repository.UserRepository;
-import com.example.sec.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

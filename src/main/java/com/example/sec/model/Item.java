@@ -3,6 +3,7 @@ package com.example.sec.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Table(name = "ITEMS")

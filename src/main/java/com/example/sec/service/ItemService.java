@@ -1,5 +1,7 @@
 package com.example.sec.service;
 
+import com.example.sec.dto.ItemDTO;
+import com.example.sec.mapper.ItemMapper;
 import com.example.sec.model.Item;
 import com.example.sec.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,15 +14,17 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final ItemMapper itemMapper;
 
-    public List<Item> getItems() {
-        return itemRepository.findAll();
+    public List<ItemDTO> getItems() {
+       return itemMapper.toDtoList(itemRepository.findAll());
     }
 
-    public Item createItem(Item item) {
+    public ItemDTO createItem(ItemDTO item) {
         String mark = calculateMark(item.getPoint());
-        item.setMark(mark);
-        return itemRepository.save(item);
+        item.setGrade(mark);
+        itemRepository.save(itemMapper.toModel(item));
+        return item;
     }
 
     private String calculateMark(Integer point) {
@@ -43,23 +47,25 @@ public class ItemService {
         }
     }
 
-    public Item updateItem(Item item) {
+    public ItemDTO updateItem(ItemDTO item) {
         if (item == null) {
             return null;
         }
 
-        Item item1 = getItemById(item.getId());
+        ItemDTO item1 = getItemById(item.getId());
 
         String mark = calculateMark(item.getPoint());
-        item1.setMark(mark);
+        item1.setGrade(mark);
         item1.setName(item.getName());
 
-        return itemRepository.save(item1);
+        Item item2 = itemMapper.toModel(item1);
+        itemRepository.save(item2);
+
+        return item1;
     }
 
-    public Item getItemById(int id) {
-
-        return itemRepository.findById(id).orElse(null);
+    public ItemDTO getItemById(int id) {
+        return itemMapper.toDto(itemRepository.findById(id).orElseThrow());
     }
 
     public void deleteItem(int id) {
