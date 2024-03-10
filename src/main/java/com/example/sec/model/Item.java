@@ -19,7 +19,7 @@ public class Item extends BaseEntity{
     @Column(name = "PRICE")
     private int price;
 
-    @Column(name = "POINT")
+    @Column(name = "POINT", columnDefinition = "NUMERIC")
     private int point;
 
     @Column(name = "MARK")
